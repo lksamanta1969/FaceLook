@@ -398,20 +398,16 @@ input{
   color: white;
 }
 
-input::placeholder{
-  color: #bbb;
-}
 .topbar input{
-  background: #1877f2;
-  color: white;
-  border: 1px solid white;
+  background:white;
+  color:black;
+  border:1px solid #ccc;
+  padding:8px;
+  border-radius:8px;
 }
 
 .topbar input::placeholder{
-  color: white;
-}
-.topbar input{
-  background: #1877f2 !important;
+  color:#666;
 }
 .topbar{
   position: relative;
