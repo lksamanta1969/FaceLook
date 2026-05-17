@@ -82,10 +82,25 @@ JSON.parse(localStorage.getItem("friends") || "null") || [
 {id:5,name:"Subhajit Ghosh",online:true,img:"https://i.pravatar.cc/40?img=5"},
 {id:6,name:"Sophia",online:true,img:"https://i.pravatar.cc/40?img=6"},
 {id:7,name:"Emily",online:false,img:"https://i.pravatar.cc/40?img=7"},
-{id:8,name:"Michael",online:true,img:"https://i.pravatar.cc/40?img=8"}
-
+{id:8,name:"Michael",online:true,img:"https://i.pravatar.cc/40?img=8"},
+{id:9,name:"Rohan",online:true,img:"https://i.pravatar.cc/40?img=9"},
+{id:10,name:"Ritesh",online:true,img:"https://i.pravatar.cc/40?img=10"},
+{id:11,name:"Raj",online:true,img:"https://i.pravatar.cc/40?img=11"},
+{id:12,name:"Rima",online:true,img:"https://i.pravatar.cc/40?img=12"},
+{id:13,name:"Sourav",online:true,img:"https://i.pravatar.cc/40?img=13"},
+{id:14,name:"Sayan",online:true,img:"https://i.pravatar.cc/40?img=14"},
+{id:15,name:"Tanisha",online:true,img:"https://i.pravatar.cc/40?img=15"},
+{id:16,name:"Tania",online:true,img:"https://i.pravatar.cc/40?img=16"},
+{id:17,name:"Arijit",online:true,img:"https://i.pravatar.cc/40?img=17"},
+{id:18,name:"Ankita",online:true,img:"https://i.pravatar.cc/40?img=18"},
+{id:19,name:"Abir",online:true,img:"https://i.pravatar.cc/40?img=19"},
+{id:20,name:"Ayesha",online:true,img:"https://i.pravatar.cc/40?img=20"}
 ]
 );
+useEffect(() => {
+  const online = friends.filter(f => f.online);
+  setOnlineUsers(online);
+}, [friends]);
 
 const filteredFriends = friends.filter(f =>
 (f.name || "").toLowerCase().includes(search.toLowerCase())
@@ -320,7 +335,59 @@ return(
 placeholder="Search"
 value={search}
 onChange={(e)=>setSearch(e.target.value)}
+style={{
+background:"#1f1f1f",
+color:"white",
+border:"1px solid #444",
+padding:"8px",
+borderRadius:"8px"
+}}
 />
+
+{search !== "" && (
+
+<div style={{
+position:"absolute",
+background:"#1f1f1f",
+padding:"10px",
+borderRadius:"10px",
+marginTop:"5px",
+width:"220px",
+zIndex:"999"
+}}>
+
+{filteredFriends.map((f,i)=>(
+
+<div
+key={i}
+style={{
+display:"flex",
+alignItems:"center",
+gap:"10px",
+padding:"6px"
+}}
+>
+
+<img
+src={f.img}
+width="35"
+height="35"
+style={{borderRadius:"50%"}}
+alt=""
+/>
+
+<span style={{color:"white"}}>
+{f.name}
+</span>
+
+</div>
+
+))}
+
+</div>
+
+)}
+
 
 <button onClick={() => { setPage("home"); setSearch(""); }}>Home</button>
 
@@ -447,7 +514,37 @@ setPosts(updated);
 
 <h4>Contacts</h4>
 
+
+{filteredFriends.map((f,i)=>(
+
+<div
+key={i}
+style={{
+display:"flex",
+alignItems:"center",
+gap:"10px",
+marginBottom:"10px"
+}}
+>
+
+<img
+src={f.img}
+width="40"
+height="40"
+style={{borderRadius:"50%"}}
+alt=""
+/>
+
+<div>
+🟢 {f.name}
+</div>
+
+</div>
+
+))}
+
 {onlineUsers.map((f,i)=>(
+
 
 <div
 key={i}
