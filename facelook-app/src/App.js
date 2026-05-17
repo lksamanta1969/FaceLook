@@ -74,8 +74,16 @@ const filteredPosts = posts.filter(post =>
 
 const [friends,setFriends]=useState(
 JSON.parse(localStorage.getItem("friends") || "null") || [
+
 {id:1,name:"Rahul",online:true,img:"https://i.pravatar.cc/40?img=1"},
-{id:2,name:"Priya",online:false,img:"https://i.pravatar.cc/40?img=2"}
+{id:2,name:"Priya",online:true,img:"https://i.pravatar.cc/40?img=2"},
+{id:3,name:"Amit Roy",online:true,img:"https://i.pravatar.cc/40?img=3"},
+{id:4,name:"Moumita Paul",online:false,img:"https://i.pravatar.cc/40?img=4"},
+{id:5,name:"Subhajit Ghosh",online:true,img:"https://i.pravatar.cc/40?img=5"},
+{id:6,name:"Sophia",online:true,img:"https://i.pravatar.cc/40?img=6"},
+{id:7,name:"Emily",online:false,img:"https://i.pravatar.cc/40?img=7"},
+{id:8,name:"Michael",online:true,img:"https://i.pravatar.cc/40?img=8"}
+
 ]
 );
 
@@ -109,35 +117,6 @@ localStorage.setItem("friends",JSON.stringify(friends))
 useEffect(()=>{
 localStorage.setItem("chat",JSON.stringify(chat))
 },[chat]);
-// ✅ Bengali users list (OUTSIDE useEffect)
-const bengaliUsers = [
-  { id: 101, firstName: "Sourav", lastName: "Das" },
-  { id: 102, firstName: "Priya", lastName: "Sen" },
-  { id: 103, firstName: "Amit", lastName: "Roy" },
-  { id: 104, firstName: "Moumita", lastName: "Paul" },
-  { id: 105, firstName: "Subhajit", lastName: "Ghosh" }
-];
-
-// ✅ First load
-useEffect(() => {
-  setOnlineUsers(bengaliUsers);
-}, []);
-
-// ✅ Search filter
-useEffect(() => {
-  if (search.trim() === "") {
-    setOnlineUsers(bengaliUsers);
-    return;
-  }
-
-  const filtered = bengaliUsers.filter(u =>
-    (u.firstName + " " + u.lastName)
-      .toLowerCase()
-      .includes(search.toLowerCase())
-  );
-
-  setOnlineUsers(filtered);
-}, [search]);
 
 useEffect(()=>{
 localStorage.setItem("dark",JSON.stringify(dark))
@@ -246,43 +225,6 @@ if (!isLoggedIn) {
 }
 
 
- if (authPage === "signup") {
-  return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h2>Sign Up</h2>
-
-      <input
-  type="text"
-  placeholder="Name"
-  onChange={(e) => setName(e.target.value)}
-/><br /><br />
-
-<input
-  type="email"
-  placeholder="Email"
-  onChange={(e) => setEmail(e.target.value)}
-/><br /><br />
-
-<input
-  type="password"
-  placeholder="Password"
-  onChange={(e) => setPassword(e.target.value)}
-/>
-      <br /><br />
-
-      <button onClick={handleSignup}>Sign Up</button>
-
-      <p>
-        Already have account?{" "}
-        <span onClick={() => setAuthPage("login")} style={{color:"blue", cursor:"pointer"}}>
-          Login
-        </span>
-      </p>
-    </div>
-  );
-}
-
-
 function addPost(){
 
 if(postText==="" && postImages.length===0) return;
@@ -368,7 +310,7 @@ return(
 
 <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
 
-<img src={logo} width="32"/>
+<img src={logo} width="32" alt=""/>
 
 <b>FaceLook</b>
 
@@ -505,18 +447,55 @@ setPosts(updated);
 
 <h4>Contacts</h4>
 
-{filteredFriends.map(f=>(
+{onlineUsers.map((f,i)=>(
 
-<div key={f.id}>
+<div
+key={i}
+style={{
+display:"flex",
+alignItems:"center",
+gap:"10px",
+marginBottom:"10px"
+}}
+>
+
+<img
+src={f.img}
+width="40"
+height="40"
+style={{borderRadius:"50%"}}
+alt=""
+/>
+
+<div>
 🟢 {f.name}
+</div>
+
+<button
+onClick={()=>{
+setActiveFriend(f.name);
+setPage("messages");
+}}
+>
+💬
+</button>
+
+<button onClick={()=>startCall(f.name,"audio")}>
+📞
+</button>
+
+<button onClick={()=>startCall(f.name,"video")}>
+📹
+</button>
+
 </div>
 
 ))}
 
-</div> 
 </div>
-)}
+</div>
 
+)}
 {page==="profile" && (
 
 <div className="profile">
@@ -607,37 +586,49 @@ setPosts(updated);
   <div>
     <h4>Online Results</h4>
 
-    {onlineUsers.map(user => (
-      <div key={user.id} style={{ marginBottom: "10px" }}>
-        <img 
-          src={user.image} 
-          width="40" 
-          style={{ borderRadius: "50%", marginRight: "8px" }} 
-        />
-        {user.firstName} {user.lastName}
+ {onlineUsers.map((f, i) => (
+  <div
+    key={i}
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      marginBottom: "10px"
+    }}
+  >
+    <img
+      src={f.img}
+      width="40"
+      height="40"
+      style={{ borderRadius: "50%" }}
+      alt=""
+    />
 
-        <button onClick={() => {
-        const fullName = user.firstName + " " + user.lastName;
+    <div>
+      🟢 {f.name}
+    </div>
 
-if (friends.some(f => f.name === fullName)) return;
+    <button
+      onClick={() => {
+        setActiveFriend(f.name);
+        setPage("messages");
+      }}
+    >
+      💬
+    </button>
 
-setFriends([
-  ...friends,
-  {
-    id: Date.now(),
-    name: fullName,
-    online: true
-  }
-]);
+    <button onClick={() => startCall(f.name, "audio")}>
+      📞
+    </button>
 
-setOnlineUsers(onlineUsers.filter(u => u.id !== user.id));  
-        }}>
-          Add
-        </button>
-      </div>
-    ))}
+    <button onClick={() => startCall(f.name, "video")}>
+      📹
+    </button>
   </div>
-)}
+))} 
+</div>
+)}   {/* <-- FIXED: Closed the onlineUsers.length > 0 block properly */}
+
 <input
 value={newFriend}
 onChange={(e)=>setNewFriend(e.target.value)}
@@ -721,74 +712,9 @@ placeholder="message"
 
 )}
 
-
-
-{/* CALL POPUP */}
-
-{call && (
-
-<div style={{
-position:"fixed",
-top:"40%",
-left:"40%",
-background:"white",
-padding:"20px",
-borderRadius:"10px",
-boxShadow:"0 0 10px rgba(0,0,0,0.3)"
-}}>
-
-<h3>
-{call.type==="video"?"📹":"📞"}
-Calling {call.friend}
-</h3>
-
-<button onClick={endCall}>
-End Call
-</button>
-
 </div>
 
-)}
-
-
-
-{/* SOCIAL ICONS */}
-
-<div style={{
-position:"fixed",
-right:"12px",
-top:"30%",
-display:"flex",
-flexDirection:"column",
-gap:"12px"
-}}>
-
-<a href="https://wa.me" target="_blank">
-<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="42"/>
-</a>
-
-<a href="https://facebook.com" target="_blank">
-<img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" width="42"/>
-</a>
-
-<a href="https://instagram.com" target="_blank">
-<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="42"/>
-</a>
-
-<a href="https://twitter.com" target="_blank">
-<img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" width="42"/>
-</a>
-
-<a href="https://linkedin.com" target="_blank">
-<img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="42"/>
-</a>
-
-<a href="https://t.me" target="_blank">
-<img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" width="42"/>
-</a>
-
-</div>
-</div>
-);
+); // <-- FIXED: Added missing closing parenthesis here
 }
+
 export default App;
