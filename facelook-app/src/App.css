@@ -104,6 +104,9 @@ padding:6px;
 margin:5px;
 border-radius:6px;
 border:1px solid #ccc;
+color:black;
+background:white;
+caret-color:black;
 }
 
 /* images */

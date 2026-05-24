@@ -240,27 +240,43 @@ if (!isLoggedIn) {
 }
 
 
-function addPost(){
+async function addPost() {
 
-if(postText==="" && postImages.length===0) return;
-
-const images=postImages.map(f=>URL.createObjectURL(f));
-
-const newPost={
-text:postText,
-images,
-likes:0,
-loves:0,
-hahas:0,
-time:new Date().toLocaleString()
-};
-
-setPosts([newPost,...posts]);
-
-setPostText("");
-setPostImages([]);
-
-}
+  if(postText === "" && postImages.length === 0) return;
+  
+  const imagePromises = postImages.map(file => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+  
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+  
+      reader.readAsDataURL(file);
+    });
+  });
+  
+  const images = await Promise.all(imagePromises);
+  
+  const newPost = {
+    text: postText,
+    images,
+    likes: 0,
+    loves: 0,
+    hahas: 0,
+    time: new Date().toLocaleString()
+  };
+  
+  const updatedPosts = [newPost, ...posts];
+  
+  setPosts(updatedPosts);
+  
+  localStorage.setItem("posts", JSON.stringify(updatedPosts));
+  
+  setPostText("");
+  setPostImages([]);
+  
+  }
 
 function addFriend(){
 
@@ -369,7 +385,7 @@ padding:"6px"
 >
 
 <img
-src={f.img}
+src={f.img || logo}
 width="35"
 height="35"
 style={{borderRadius:"50%"}}
@@ -535,13 +551,17 @@ style={{borderRadius:"50%"}}
 alt=""
 />
 
-<div>
-🟢 {f.name}
+<div
+style={{
+background:"chocolate",
+padding:"6px 12px",
+borderRadius:"20px",
+color:"white",
+fontWeight:"500"
+}}
+>
+🟢 {f.name || "Friend"}
 </div>
-
-</div>
-
-))}
 
 {onlineUsers.map((f,i)=>(
 
@@ -590,9 +610,15 @@ setPage("messages");
 ))}
 
 </div>
+
+))}
+
+</div>
+
 </div>
 
 )}
+
 {page==="profile" && (
 
 <div className="profile">
@@ -811,7 +837,7 @@ placeholder="message"
 
 </div>
 
-); // <-- FIXED: Added missing closing parenthesis here
+);
 }
 
 export default App;
