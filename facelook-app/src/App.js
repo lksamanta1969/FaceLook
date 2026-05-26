@@ -3,7 +3,7 @@
 import React,{useState,useEffect} from "react";
 import "./App.css";
 import logo from "./logo.png";
-import { db } from "./firebase";
+import { auth, db } from "./firebase";
 
 import {
   collection,
@@ -11,6 +11,10 @@ import {
   getDocs
 } from "firebase/firestore";
 
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "firebase/auth";
 function App(){
 useEffect(() => {
   const savedImage = localStorage.getItem("profileImage");
@@ -42,17 +46,40 @@ const handleSignup = async () => {
     alert("Please fill all fields");
     return;
   }
+try {
+  await createUserWithEmailAndPassword(auth, email, password);
+} catch (error) {
+  alert(error.message);
+  return;
+}
 
   const user = {
     name: nameInput,
     email,
-    password
+    password,
   };
   await addDoc(collection(db, "users"), user);
   localStorage.setItem("user", JSON.stringify(user));
 
   alert("Signup Successful");
   setAuthPage("login");
+};
+const handleLogin = async () => {
+  if (!email || !password) {
+    alert("Please enter email and password");
+    return;
+  }
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+
+    localStorage.setItem("login", "true");
+    setIsLoggedIn(true);
+
+    alert("Login Successful");
+  } catch (error) {
+    alert(error.message);
+  }
 };
 
 const [profileImage, setProfileImage] = useState(
@@ -166,21 +193,8 @@ if (!isLoggedIn) {
         />
         <br /><br />
 
-        <button onClick={() => {
-          const user = JSON.parse(localStorage.getItem("user") || "null");
-
-          if (!user) {
-            alert("No account found. Please sign up.");
-            return;
-          }
-
-          if (email === user.email && password === user.password) {
-            localStorage.setItem("login", "true");
-            setIsLoggedIn(true);
-          } else {
-            alert("Wrong email or password");
-          }
-        }}>
+        <button onClick={handleLogin}>
+ 
           Login
         </button>
 
