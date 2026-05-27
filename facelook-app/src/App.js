@@ -136,7 +136,19 @@ JSON.parse(localStorage.getItem("chat") || "[]")
 );
 
 const [call,setCall]=useState(null);
+function startCall(friendName,type){
 
+setCall({
+name:friendName,
+type:type
+});
+
+alert(
+(type==="video" ? "📹 Video Call to " : "📞 Calling ")
++ friendName
+);
+
+}
 const [dark,setDark]=useState(
 JSON.parse(localStorage.getItem("dark") || "false")
 );
@@ -402,8 +414,39 @@ alt=""
 />
 
 <span style={{color:"white"}}>
-{f.name}
+  {f.name}
 </span>
+
+<button
+onClick={()=>startCall(f.name,"audio")}
+style={{
+marginLeft:"10px",
+background:"#1877f2",
+border:"none",
+color:"white",
+padding:"5px 8px",
+borderRadius:"6px",
+cursor:"pointer"
+}}
+>
+📞
+</button>
+
+<button
+onClick={()=>startCall(f.name,"video")}
+style={{
+marginLeft:"5px",
+background:"#1877f2",
+border:"none",
+color:"white",
+padding:"5px 8px",
+borderRadius:"6px",
+cursor:"pointer"
+}}
+>
+📹
+</button>
+
 
 </div>
 
@@ -539,6 +582,91 @@ setPosts(updated);
 
 <h4>Contacts</h4>
 
+<div style={{
+display:"flex",
+flexDirection:"column",
+gap:"12px",
+alignItems:"flex-end",
+}}>
+
+<button style={{
+background:"#1877f2",
+color:"white",
+border:"none",
+padding:"14px",
+borderRadius:"12px",
+fontSize:"20px",
+width:"55px",
+height:"55px"
+}}>
+f
+</button>
+
+<button style={{
+background:"#E1306C",
+color:"white",
+border:"none",
+padding:"14px",
+borderRadius:"12px",
+fontSize:"20px",
+width:"55px",
+height:"55px",
+display:"flex",
+alignItems:"center",
+justifyContent:"center"
+}}>
+📷
+</button>
+
+<button style={{
+background:"#25D366",
+color:"white",
+border:"none",
+padding:"14px",
+borderRadius:"12px",
+fontSize:"20px",
+width:"55px",
+height:"55px",
+display:"flex",
+alignItems:"center",
+justifyContent:"center"
+}}>
+💬
+</button>
+
+<button style={{
+background:"#0A66C2",
+color:"white",
+border:"none",
+padding:"14px",
+borderRadius:"12px",
+fontSize:"20px",
+width:"55px",
+height:"55px",
+display:"flex",
+alignItems:"center",
+justifyContent:"center"
+}}>
+in
+</button>
+
+<button style={{
+background:"black",
+color:"white",
+border:"none",
+padding:"14px",
+borderRadius:"12px",
+fontSize:"20px",
+width:"55px",
+height:"55px",
+display:"flex",
+alignItems:"center",
+justifyContent:"center"
+}}>
+𝕏
+</button>
+
+</div>
 
 {filteredFriends.map((f,i)=>(
 
@@ -591,9 +719,6 @@ style={{borderRadius:"50%"}}
 alt=""
 />
 
-<div>
-🟢 {f.name}
-</div>
 
 <button
 onClick={()=>{
