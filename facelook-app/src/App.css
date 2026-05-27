@@ -104,11 +104,14 @@ padding:6px;
 margin:5px;
 border-radius:6px;
 border:1px solid #ccc;
-color:black;
-background:white;
-caret-color:black;
+color:white;
+background:green;
+caret-color:white;
 }
 
+input::placeholder{
+color:#bbb;
+}
 /* images */
 
 img{

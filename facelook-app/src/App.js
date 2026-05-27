@@ -99,31 +99,24 @@ const filteredPosts = posts.filter(post =>
 (post.text || "").toLowerCase().includes(search.toLowerCase())
 );
 
-const [friends,setFriends]=useState(
-JSON.parse(localStorage.getItem("friends") || "null") || [
+const [friends,setFriends]=useState([])
 
-{id:1,name:"Rahul",online:true,img:"https://i.pravatar.cc/40?img=1"},
-{id:2,name:"Priya",online:true,img:"https://i.pravatar.cc/40?img=2"},
-{id:3,name:"Amit Roy",online:true,img:"https://i.pravatar.cc/40?img=3"},
-{id:4,name:"Moumita Paul",online:false,img:"https://i.pravatar.cc/40?img=4"},
-{id:5,name:"Subhajit Ghosh",online:true,img:"https://i.pravatar.cc/40?img=5"},
-{id:6,name:"Sophia",online:true,img:"https://i.pravatar.cc/40?img=6"},
-{id:7,name:"Emily",online:false,img:"https://i.pravatar.cc/40?img=7"},
-{id:8,name:"Michael",online:true,img:"https://i.pravatar.cc/40?img=8"},
-{id:9,name:"Rohan",online:true,img:"https://i.pravatar.cc/40?img=9"},
-{id:10,name:"Ritesh",online:true,img:"https://i.pravatar.cc/40?img=10"},
-{id:11,name:"Raj",online:true,img:"https://i.pravatar.cc/40?img=11"},
-{id:12,name:"Rima",online:true,img:"https://i.pravatar.cc/40?img=12"},
-{id:13,name:"Sourav",online:true,img:"https://i.pravatar.cc/40?img=13"},
-{id:14,name:"Sayan",online:true,img:"https://i.pravatar.cc/40?img=14"},
-{id:15,name:"Tanisha",online:true,img:"https://i.pravatar.cc/40?img=15"},
-{id:16,name:"Tania",online:true,img:"https://i.pravatar.cc/40?img=16"},
-{id:17,name:"Arijit",online:true,img:"https://i.pravatar.cc/40?img=17"},
-{id:18,name:"Ankita",online:true,img:"https://i.pravatar.cc/40?img=18"},
-{id:19,name:"Abir",online:true,img:"https://i.pravatar.cc/40?img=19"},
-{id:20,name:"Ayesha",online:true,img:"https://i.pravatar.cc/40?img=20"}
-]
-);
+useEffect(() => {
+  const loadUsers = async () => {
+
+    const querySnapshot = await getDocs(collection(db,"users"));
+
+    const users = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    setFriends(users);
+  };
+
+  loadUsers();
+}, []);
+
 useEffect(() => {
   const online = friends.filter(f => f.online);
   setOnlineUsers(online);
@@ -366,9 +359,9 @@ placeholder="Search"
 value={search}
 onChange={(e)=>setSearch(e.target.value)}
 style={{
-background:"#1f1f1f",
+background:"green",
 color:"white",
-border:"1px solid #444",
+border:"1px solid #0f0",
 padding:"8px",
 borderRadius:"8px"
 }}
@@ -378,6 +371,8 @@ borderRadius:"8px"
 
 <div style={{
 position:"absolute",
+top:"60px",
+left:"120px",
 background:"#1f1f1f",
 padding:"10px",
 borderRadius:"10px",
@@ -576,8 +571,6 @@ fontWeight:"500"
 >
 🟢 {f.name || "Friend"}
 </div>
-
-{onlineUsers.map((f,i)=>(
 
 
 <div
