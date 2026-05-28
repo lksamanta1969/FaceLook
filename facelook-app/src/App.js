@@ -110,7 +110,7 @@ useEffect(() => {
       id: doc.id,
       ...doc.data()
     }));
-
+    console.log(users);
     setFriends(users);
   };
 
@@ -125,7 +125,7 @@ useEffect(() => {
 const filteredFriends = friends.filter(f =>
 (f.name || "").toLowerCase().includes(search.toLowerCase())
 );
-
+console.log(friends);
 const [newFriend,setNewFriend]=useState("");
 const [activeFriend,setActiveFriend]=useState(null);
 
@@ -305,7 +305,8 @@ setFriends([
 ...friends,
 {
 id:Date.now(),
-name:newFriend
+name:newFriend,
+online:true
 }
 ]);
 setOnlineUsers(onlineUsers.filter(u => 
@@ -382,7 +383,7 @@ borderRadius:"8px"
 {search !== "" && (
 
 <div style={{
-position:"absolute",
+position:"fixed",
 top:"60px",
 left:"120px",
 background:"#1f1f1f",
@@ -390,13 +391,18 @@ padding:"10px",
 borderRadius:"10px",
 marginTop:"5px",
 width:"220px",
-zIndex:"999"
+zIndex:"999",
+display:"block"
 }}>
 
 {filteredFriends.map((f,i)=>(
 
 <div
 key={i}
+onClick={()=>{
+setName(f.name);
+setSearch("");
+}}
 style={{
 display:"flex",
 alignItems:"center",
@@ -585,10 +591,16 @@ setPosts(updated);
 <div style={{
 display:"flex",
 flexDirection:"column",
-gap:"12px",
-alignItems:"flex-end",
+gap:"14px",
+alignItems:"center"
 }}>
 
+<div style={{
+display:"flex",
+flexDirection:"column",
+alignItems:"center",
+gap:"4px"
+}}>
 <button style={{
 background:"#1877f2",
 color:"white",
@@ -597,11 +609,30 @@ padding:"14px",
 borderRadius:"12px",
 fontSize:"20px",
 width:"55px",
-height:"55px"
+height:"55px",
+display:"flex",
+alignItems:"center",
+justifyContent:"center",
+cursor:"pointer"
 }}>
 f
 </button>
 
+<span style={{
+color:"white",
+fontSize:"12px"
+}}>
+Facebook
+</span>
+</div>
+
+
+<div style={{
+display:"flex",
+flexDirection:"column",
+alignItems:"center",
+gap:"4px"
+}}>
 <button style={{
 background:"#E1306C",
 color:"white",
@@ -613,11 +644,27 @@ width:"55px",
 height:"55px",
 display:"flex",
 alignItems:"center",
-justifyContent:"center"
+justifyContent:"center",
+cursor:"pointer"
 }}>
 📷
 </button>
 
+<span style={{
+color:"white",
+fontSize:"12px"
+}}>
+Instagram
+</span>
+</div>
+
+
+<div style={{
+display:"flex",
+flexDirection:"column",
+alignItems:"center",
+gap:"4px"
+}}>
 <button style={{
 background:"#25D366",
 color:"white",
@@ -629,11 +676,27 @@ width:"55px",
 height:"55px",
 display:"flex",
 alignItems:"center",
-justifyContent:"center"
+justifyContent:"center",
+cursor:"pointer"
 }}>
 💬
 </button>
 
+<span style={{
+color:"white",
+fontSize:"12px"
+}}>
+WhatsApp
+</span>
+</div>
+
+
+<div style={{
+display:"flex",
+flexDirection:"column",
+alignItems:"center",
+gap:"4px"
+}}>
 <button style={{
 background:"#0A66C2",
 color:"white",
@@ -645,11 +708,62 @@ width:"55px",
 height:"55px",
 display:"flex",
 alignItems:"center",
-justifyContent:"center"
+justifyContent:"center",
+cursor:"pointer"
 }}>
 in
 </button>
 
+<span style={{
+color:"white",
+fontSize:"12px"
+}}>
+LinkedIn
+</span>
+</div>
+
+
+<div style={{
+display:"flex",
+flexDirection:"column",
+alignItems:"center",
+gap:"4px"
+}}>
+<button
+onClick={()=>window.open("https://youtube.com")}
+style={{
+background:"red",
+color:"white",
+border:"none",
+padding:"14px",
+borderRadius:"12px",
+fontSize:"20px",
+width:"55px",
+height:"55px",
+display:"flex",
+alignItems:"center",
+justifyContent:"center",
+cursor:"pointer"
+}}
+>
+▶
+</button>
+
+<span style={{
+color:"white",
+fontSize:"12px"
+}}>
+YouTube
+</span>
+</div>
+
+
+<div style={{
+display:"flex",
+flexDirection:"column",
+alignItems:"center",
+gap:"4px"
+}}>
 <button style={{
 background:"black",
 color:"white",
@@ -661,10 +775,21 @@ width:"55px",
 height:"55px",
 display:"flex",
 alignItems:"center",
-justifyContent:"center"
+justifyContent:"center",
+cursor:"pointer"
 }}>
 𝕏
 </button>
+
+<span style={{
+color:"white",
+fontSize:"12px"
+}}>
+X
+</span>
+</div>
+
+</div>
 
 </div>
 
@@ -747,7 +872,6 @@ setPage("messages");
 
 </div>
 
-</div>
 
 )}
 
@@ -838,7 +962,15 @@ setPage("messages");
 
 <h3>Add Friend</h3>
 {onlineUsers.length > 0 && (
-  <div>
+ <div style={{
+position:"fixed",
+right:"20px",
+bottom:"120px",
+background:"#1f1f1f",
+padding:"15px",
+borderRadius:"12px",
+zIndex:"999"
+}}>
     <h4>Online Results</h4>
 
  {onlineUsers.map((f, i) => (
@@ -882,7 +1014,8 @@ setPage("messages");
   </div>
 ))} 
 </div>
-)}   {/* <-- FIXED: Closed the onlineUsers.length > 0 block properly */}
+)}  
+ {/* <-- FIXED: Closed the onlineUsers.length > 0 block properly */}
 
 <input
 value={newFriend}
