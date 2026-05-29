@@ -962,15 +962,19 @@ setPage("messages");
 
 <h3>Add Friend</h3>
 {onlineUsers.length > 0 && (
- <div style={{
+  
+<div style={{
 position:"fixed",
 right:"20px",
 bottom:"120px",
 background:"#1f1f1f",
 padding:"15px",
 borderRadius:"12px",
-zIndex:"999"
+zIndex:"999",
+width:"320px"
 }}>
+
+
     <h4>Online Results</h4>
 
  {onlineUsers.map((f, i) => (
@@ -1013,9 +1017,10 @@ zIndex:"999"
     </button>
   </div>
 ))} 
+
 </div>
-)}  
- {/* <-- FIXED: Closed the onlineUsers.length > 0 block properly */}
+
+)}
 
 <input
 value={newFriend}
@@ -1030,10 +1035,30 @@ Add
 
 {filteredFriends.map((f,i)=>(
 
-<div key={i}>
+<div
+key={i}
+style={{
+display:"flex",
+alignItems:"center",
+justifyContent:"space-between",
+gap:"10px",
+marginBottom:"10px",
+width:"100%"
+}}
+>
 
-🟢 {f.name}
+<div style={{
+display:"flex",
+alignItems:"center",
+gap:"8px"
+}}>
+  🟢 {f.name}
+</div>
 
+<div style={{
+display:"flex",
+gap:"5px"
+}}>
 <button onClick={()=>{
 setActiveFriend(f.name);
 setPage("messages");
@@ -1048,7 +1073,7 @@ setPage("messages");
 <button onClick={()=>startCall(f.name,"video")}>
 📹
 </button>
-
+</div>
 </div>
 
 ))}
@@ -1056,8 +1081,6 @@ setPage("messages");
 </div>
 
 )}
-
-
 
 {/* MESSAGE */}
 

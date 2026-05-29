@@ -21,22 +21,24 @@ z-index:10;
 /* layout */
 
 .layout{
-display:flex;
-gap:20px;
-padding:20px;
-}
-.left {
-  width: 25%;
+  display:flex;
+  gap:20px;
+  padding:20px;
+  align-items:flex-start;
 }
 
-.center {
-  width: 50%;
-  margin: 0 auto;
+.left{
+  width:22%;
 }
 
-.right {
-  width: 25%;
+.center{
+  width:58%;
 }
+
+.right{
+  width:12%;
+}
+
 /* sidebar */
 
 .left{
