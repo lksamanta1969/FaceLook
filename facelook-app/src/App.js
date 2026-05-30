@@ -170,7 +170,9 @@ localStorage.setItem("dark",JSON.stringify(dark))
 },[dark]);
 useEffect(() => {
   if (profileImage) {
-    localStorage.setItem("profileImage", profileImage);
+ if(profileImage && profileImage.length < 500000){
+  localStorage.setItem("profileImage", profileImage);
+}   
   }
 }, [profileImage]);
 // line 75-76 এর পরে
@@ -297,9 +299,14 @@ async function addPost() {
   
   }
 
-function addFriend(){
+async function addFriend(){
 
 if(newFriend==="") return;
+
+await addDoc(collection(db,"users"),{
+  name:newFriend,
+  online:true
+});
 
 setFriends([
 ...friends,
@@ -336,20 +343,7 @@ setMessage("");
 
 }
 
-function startCall(friend,type){
 
-setCall({
-friend,
-type
-});
-
-}
-
-function endCall(){
-
-setCall(null);
-
-}
 
 return(
 
@@ -422,6 +416,23 @@ alt=""
 <span style={{color:"white"}}>
   {f.name}
 </span>
+
+<button
+onClick={()=>{
+setFriends(friends.filter(x => x.id !== f.id));
+}}
+style={{
+marginLeft:"10px",
+background:"red",
+border:"none",
+color:"white",
+padding:"5px 10px",
+borderRadius:"5px",
+cursor:"pointer"
+}}
+>
+🗑️
+</button>
 
 <button
 onClick={()=>startCall(f.name,"audio")}
@@ -792,6 +803,12 @@ X
 </div>
 
 </div>
+
+<div style={{
+  display:"block",
+  width:"100%",
+  marginTop:"20px"
+}}>
 
 {filteredFriends.map((f,i)=>(
 
