@@ -885,11 +885,6 @@ setPage("messages");
 
 </div>
 
-))}
-
-</div>
-
-
 )}
 
 {page==="profile" && (
