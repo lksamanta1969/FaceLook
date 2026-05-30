@@ -879,13 +879,12 @@ setPage("messages");
 📹
 </button>
 
-</div>
+
 
 ))}
 
 </div>
 
-)}
 
 {page==="profile" && (
 
@@ -1092,8 +1091,6 @@ setPage("messages");
 
 </div>
 
-)}
-
 {/* MESSAGE */}
 
 {page==="messages" && (
@@ -1135,9 +1132,10 @@ placeholder="message"
 
 )}
 
-</div>
+
 
 );
+
 }
 
 export default App;
