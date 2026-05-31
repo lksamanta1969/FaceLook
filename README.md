@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +69,76 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+=======
+# FaceLook
+
+A modern social media web application built using React, Node.js, Express, and PostgreSQL.
+
+## Features
+
+- User Profile System
+- Create Posts
+- Image Upload
+- Friends List
+- Messaging UI
+- Dark Theme UI
+- Responsive Layout
+- Social Media Sidebar
+- React Frontend
+- Node.js Backend
+
+## Tech Stack
+
+### Frontend
+- React.js
+- CSS
+- HTML
+- JavaScript
+
+### Backend
+- Node.js
+- Express.js
+
+### Database
+- PostgreSQL
+
+## Project Structure
+
+FaceLook/
+│
+├── facelook-app
+├── facelook_backend
+│
+└── README.md
+
+## Installation
+
+### Frontend
+
+```bash
+cd facelook-app
+npm install
+npm start
+cd facelook_backend
+npm install
+node server.js
+```
+
+## Future Improvements
+
+- Real-time Chat
+- Notifications
+- Video Upload
+- Mobile Responsive Design
+- Authentication System
+- Live Friend Status
+- Comments System
+
+## Developer
+
+Lakshmikanta Samanta
+
+## GitHub Repository
+
+https://github.com/lksamanta1969/FaceLook
+>>>>>>> e8f911c25380f865833ae5a3f23eb98455633e81
