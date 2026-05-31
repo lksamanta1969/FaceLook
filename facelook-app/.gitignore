@@ -21,3 +21,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+# Backup files
+*.zip
+
+# Backup folder
+Backup/
+
+# Node modules
+node_modules/
+
+# Build files
+build/
