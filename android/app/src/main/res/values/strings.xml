@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">FaceLook</string>
+    <string name="title_activity_main">FaceLook</string>
+    <string name="package_name">com.facelook.app</string>
+    <string name="custom_url_scheme">com.facelook.app</string>
+</resources>
