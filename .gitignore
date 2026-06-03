@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -33,37 +32,15 @@ node_modules/
 
 # Build files
 build/
-=======
-# dependencies
-node_modules/
+# FaceLook backups
+OLD_BACKUP/
+Backup/
+facelook-app-safe-backup/
+facelook-app_old/
 
-# production build
-build/
-dist/
+# Firebase cache
+.firebase/
+facelook-app/.firebase/
 
-# environment variables
-.env
-
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# uploads
-uploads/
-
-# editor files
-.vscode/
-.idea/
-
-# cache
-.cache/
-
-# temporary files
-temp/
-tmp/
->>>>>>> e8f911c25380f865833ae5a3f23eb98455633e81
+# Zip files
+*.zip
