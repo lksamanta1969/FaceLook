@@ -30,3 +30,14 @@ uploads/
 # temporary files
 temp/
 tmp/
+# FaceLook backups
+OLD_BACKUP/
+Backup/
+facelook-app-safe-backup/
+facelook-app_old/
+
+# Firebase cache
+.firebase/
+
+# Zip files
+*.zip

@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 
 function HomePage() {
-
   const [postText, setPostText] = useState("");
 
   const [posts, setPosts] = useState(
     JSON.parse(localStorage.getItem("posts") || "[]")
   );
-
+const profileImage = localStorage.getItem("profileImage");
   function addPost() {
-
     if (postText.trim() === "") return;
 
     const newPost = {
@@ -32,7 +30,6 @@ function HomePage() {
   }
 
   function likePost(index) {
-
     const updated = [...posts];
 
     updated[index].likes += 1;
@@ -46,7 +43,6 @@ function HomePage() {
   }
 
   function lovePost(index) {
-
     const updated = [...posts];
 
     updated[index].loves += 1;
@@ -60,66 +56,146 @@ function HomePage() {
   }
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "220px 180px 1fr",
+        gap: "20px",
+        padding: "20px"
+      }}
+    >
+      {/* LEFT MENU */}
+      <div
+        style={{
+          border: "1px solid #ccc",
+          padding: "15px",
+          borderRadius: "10px",
+          background: "#fff"
+        }}
+      >
+      <div style={{textAlign:"center",marginBottom:"20px"}}>
 
-      <h1>🏠 Home</h1>
+{profileImage ? (
+  <img
+    src={profileImage}
+    alt="Profile"
+    style={{
+      width:"120px",
+      height:"120px",
+      borderRadius:"50%",
+      objectFit:"cover",
+      border:"4px solid #1877f2",
+      display:"block",
+      margin:"auto"
+    }}
+  />
+) : (
+  <div
+    style={{
+      width:"120px",
+      height:"120px",
+      borderRadius:"50%",
+      border:"4px solid #1877f2",
+      display:"flex",
+      alignItems:"center",
+      justifyContent:"center",
+      fontSize:"60px",
+      margin:"auto"
+    }}
+  >
+    👤
+  </div>
+)}
 
-      <textarea
-        value={postText}
-        onChange={(e) =>
-          setPostText(e.target.value)
-        }
-        placeholder="What's on your mind?"
-        rows="4"
-        cols="50"
-      />
+<h3>Lakshmi Kanta</h3>
 
-      <br />
-      <br />
+</div>
+        <h3>Menu</h3>
+        <p>👤 Profile</p>
+        <p>👥 Friends</p>
+        <p>👨‍👩‍👧 Groups</p>
+        <p>📄 Pages</p>
+        <p>🔖 Saved</p>
+        <p>⚙️ Settings</p>
+      </div>
 
-      <button onClick={addPost}>
-        Post
-      </button>
+      {/* SOCIAL */}
+      <div
+        style={{
+          border: "1px solid #ccc",
+          padding: "15px",
+          borderRadius: "10px",
+          background: "#fff"
+        }}
+      >
+        <h3>Social</h3>
+        <p>📘 Facebook</p>
+        <p>📷 Instagram</p>
+        <p>💬 WhatsApp</p>
+        <p>💼 LinkedIn</p>
+        <p>▶️ YouTube</p>
+       
+        <p>❌ X</p>
+        <hr />
 
-      <hr />
+<h3>Messages</h3>
 
-      {posts.map((p, i) => (
+<p>💬 Rahul</p>
+<p>💬 Amit</p>
+<p>💬 Priya</p>
+<p>💬 Suman</p>
+      </div>
 
-        <div
-          key={i}
-          style={{
-            border: "1px solid #ccc",
-            padding: "15px",
-            marginBottom: "15px",
-            borderRadius: "10px"
-          }}
-        >
+      {/* POSTS */}
+      <div>
+        <h1>🏠 Home</h1>
 
-          <p>{p.text}</p>
+        <textarea
+          value={postText}
+          onChange={(e) => setPostText(e.target.value)}
+          placeholder="What's on your mind?"
+          rows="4"
+          cols="50"
+        />
 
-          <small>{p.time}</small>
+        <br />
+        <br />
 
-          <br />
-          <br />
+        <button onClick={addPost}>
+          Post
+        </button>
 
-          <button
-            onClick={() => likePost(i)}
+        <hr />
+
+        {posts.map((p, i) => (
+          <div
+            key={i}
+            style={{
+              border: "1px solid #ccc",
+              padding: "15px",
+              marginBottom: "15px",
+              borderRadius: "10px"
+            }}
           >
-            👍 {p.likes}
-          </button>
+            <p>{p.text}</p>
 
-          {" "}
+            <small>{p.time}</small>
 
-          <button
-            onClick={() => lovePost(i)}
-          >
-            ❤️ {p.loves}
-          </button>
+            <br />
+            <br />
 
-        </div>
+            <button onClick={() => likePost(i)}>
+              👍 {p.likes}
+            </button>
 
-      ))}
+            {" "}
 
+            <button onClick={() => lovePost(i)}>
+              ❤️ {p.loves}
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
