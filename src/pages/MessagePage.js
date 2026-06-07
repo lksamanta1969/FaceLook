@@ -3,6 +3,31 @@ import { io } from "socket.io-client";
 
 const socket = io("http://localhost:5000");
 const peerConnection = new RTCPeerConnection();
+let remoteAudio = new Audio();
+
+peerConnection.ontrack = (event) => {
+  remoteAudio.srcObject = event.streams[0];
+  remoteAudio.play();
+};
+let localStream = null;
+
+async function startMicrophone() {
+  try {
+    localStream = await navigator.mediaDevices.getUserMedia({
+      audio: true,
+      video: false
+    });
+
+    localStream.getTracks().forEach(track => {
+      peerConnection.addTrack(track, localStream);
+    });
+
+    console.log("Microphone Connected");
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 function MessagePage() {
 
   const [friend, setFriend] = useState("");
@@ -14,7 +39,25 @@ function MessagePage() {
   socket.on("incoming-call", (data) => {
     setIncomingCall(data);
   });
+socket.on("offer", async (offer) => {
 
+  await peerConnection.setRemoteDescription(
+    new RTCSessionDescription(offer)
+  );
+
+  const answer = await peerConnection.createAnswer();
+
+  await peerConnection.setLocalDescription(answer);
+
+  socket.emit("answer", answer);
+});
+socket.on("answer", async (answer) => {
+
+  await peerConnection.setRemoteDescription(
+    new RTCSessionDescription(answer)
+  );
+
+});
   socket.on("call-answered", () => {
     alert("Call Accepted");
   });
@@ -116,13 +159,23 @@ Reject
         Send
       </button>
 <button
-  onClick={() => {
-  socket.emit("call-user", {
-    name: friend,
-    type: "audio"
-  });
+ onClick={async () => {
 
-  alert("Calling " + friend);
+ await startMicrophone();
+
+const offer = await peerConnection.createOffer();
+
+await peerConnection.setLocalDescription(offer);
+
+socket.emit("offer", offer);
+
+socket.emit("call-user", {
+  name: friend,
+  type: "audio"
+});
+
+alert("Calling " + friend); 
+
 }}
 >
   📞 Call

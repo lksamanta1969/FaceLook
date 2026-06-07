@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "facelook-app",
   "homepage": "./",
   "version": "0.1.0",
@@ -44,9 +43,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-=======
-  "dependencies": {
-    "firebase": "^12.13.0"
->>>>>>> e8f911c25380f865833ae5a3f23eb98455633e81
   }
 }

@@ -64,8 +64,16 @@ io.on("connection", (socket) => {
     
     socket.broadcast.emit("call-answered", data);
   });
+  
+socket.on("offer", (offer) => {
+  socket.broadcast.emit("offer", offer);
+});
 
+socket.on("answer", (answer) => {
+  socket.broadcast.emit("answer", answer);
+});
   socket.on("disconnect", () => {
+
     console.log("User Disconnected:", socket.id);
   });
 
