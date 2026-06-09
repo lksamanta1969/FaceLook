@@ -44,6 +44,7 @@ const [bio, setBio] = useState(
   localStorage.getItem("bio") || "Hello I am using FaceLook"
 );
 const [onlineUsers, setOnlineUsers] = useState([]);
+const [friendSearch, setFriendSearch] = useState("");
 // ✅ Signup Function (must be above JSX)
 const handleSignup = async () => {
   const nameInput = name;
@@ -142,8 +143,16 @@ JSON.parse(localStorage.getItem("chat") || "[]")
 );
 
 const [call,setCall]=useState(null);
-function startCall(friendName,type){
 
+const [ringtone,setRingtone] = useState(null);
+
+function startCall(friendName,type){
+  
+const ringtoneObj = new Audio("/ring.mp3");
+ringtoneObj.loop = true;
+ringtoneObj.play();
+
+setRingtone(ringtoneObj);
 setCall({
 name:friendName,
 type:type
@@ -377,7 +386,12 @@ alert("Calling " + friend);
 
 function endCall(){
 
-setCall(null);
+  if(ringtone){
+    ringtone.pause();
+    ringtone.currentTime = 0;
+  }
+
+  setCall(null);
 
 }
 
@@ -657,7 +671,19 @@ setPosts(updated);
 <div className="right">
 
 <h4>Contacts</h4>
-
+<input
+  type="text"
+  placeholder="Search friend..."
+  value={friendSearch}
+  onChange={(e)=>setFriendSearch(e.target.value)}
+  style={{
+    width:"100%",
+    padding:"8px",
+    borderRadius:"8px",
+    border:"none",
+    marginBottom:"12px"
+  }}
+/>
 <div style={{
 display:"flex",
 flexDirection:"column",
@@ -858,88 +884,53 @@ fontSize:"12px"
 X
 </span>
 </div>
-
-</div>
-
-
-</div>
-
 {filteredFriends.map((f,i)=>(
-
-<div
-key={i}
-style={{
-display:"flex",
-alignItems:"center",
-gap:"10px",
-marginBottom:"10px"
-}}
+ <div
+  key={i}
+  style={{
+    display:"flex",
+    alignItems:"center",
+    gap:"10px",
+    marginBottom:"10px",
+    width:"100%"
+  }}
 >
+  <div
+    style={{
+      flex:1,
+      background:"chocolate",
+      padding:"6px 12px",
+      borderRadius:"20px",
+      color:"white",
+      whiteSpace:"nowrap"
+    }}
+  >
+    🟢 {f.name}
+  </div>
 
-<img
-src={f.img}
-width="40"
-height="40"
-style={{borderRadius:"50%"}}
-alt=""
-/>
+  <button onClick={()=>{
+    setActiveFriend(f.name);
+    setPage("messages");
+  }}>
+    💬
+  </button>
 
-<div
-style={{
-background:"chocolate",
-padding:"6px 12px",
-borderRadius:"20px",
-color:"white",
-fontWeight:"500"
-}}
->
-🟢 {f.name || "Friend"}
-</div>
+  <button onClick={()=>startCall(f.name,"audio")}>
+    📞
+  </button>
 
-
-<div
-key={i}
-style={{
-display:"flex",
-alignItems:"center",
-gap:"10px",
-marginBottom:"10px"
-}}
->
-
-<img
-src={f.img}
-width="40"
-height="40"
-style={{borderRadius:"50%"}}
-alt=""
-/>
-
-
-<button
-onClick={()=>{
-setActiveFriend(f.name);
-setPage("messages");
-}}
->
-💬
-</button>
-
-<button onClick={()=>startCall(f.name,"audio")}>
-📞
-</button>
-
-<button onClick={()=>startCall(f.name,"video")}>
-📹
-</button>
-
-</div>
-
-))
-
-</div>
-
+  <button onClick={()=>startCall(f.name,"video")}>
+    📹
+  </button>
+</div> 
 ))}
+
+</div>
+
+
+</div>
+
+
 
 </div>
 
@@ -1226,6 +1217,7 @@ sendMessage();
 }}
 placeholder="message"
 />
+
 
 <button onClick={sendMessage}>Send</button>
 
