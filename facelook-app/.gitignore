@@ -1,0 +1,61 @@
+# dependencies
+node_modules/
+
+# production
+build/
+dist/
+
+# environment
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Android
+android/.gradle/
+android/build/
+android/app/build/
+android/app/.cxx/
+android/captures/
+
+# Gradle
+.gradle/
+
+# Firebase
+.firebase/
+
+# Archive folders
+Archive/
+OLD_BACKUP/
+Backup/
+facelook-app-safe-backup/
+facelook-app_old/
+
+# Temporary
+*.log
+*.tmp
+# React build files
+public/asset-manifest.json
+public/manifest.json
+
+# Generated files
+*.map
+*.chunk.js
+*.chunk.css
+
+# Capacitor
+capacitor.plugins.json
+
+# Cordova
+cordova.js
+cordova_plugins.js
