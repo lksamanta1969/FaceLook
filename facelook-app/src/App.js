@@ -365,24 +365,6 @@ setMessage("");
 
 }
 
-function startCall(friend,type){
-
-const ringtone = new Audio(
-"https://actions.google.com/sounds/v1/alarms/phone_alerts_and_rings.ogg"
-);
-
-ringtone.play();
-
-setCall({
- friend,
- type
-});
-
-alert("Calling " + friend);
-
-}
-
-
 
 function endCall(){
 
