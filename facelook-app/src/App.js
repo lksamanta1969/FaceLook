@@ -697,7 +697,9 @@ flexDirection:"column",
 alignItems:"center",
 gap:"4px"
 }}>
-<button style={{
+<button
+onClick={() => window.open("https://www.facebook.com", "_blank")}
+style={{
 background:"#1877f2",
 color:"white",
 border:"none",
@@ -729,7 +731,9 @@ flexDirection:"column",
 alignItems:"center",
 gap:"4px"
 }}>
-<button style={{
+<button
+onClick={() => window.open("https://www.instagram.com", "_blank")}
+style={{
 background:"#E1306C",
 color:"white",
 border:"none",
@@ -761,7 +765,9 @@ flexDirection:"column",
 alignItems:"center",
 gap:"4px"
 }}>
-<button style={{
+<button
+onClick={() => window.open("https://web.whatsapp.com", "_blank")}
+style={{
 background:"#25D366",
 color:"white",
 border:"none",
@@ -793,7 +799,9 @@ flexDirection:"column",
 alignItems:"center",
 gap:"4px"
 }}>
-<button style={{
+<button
+onClick={() => window.open("https://www.linkedin.com", "_blank")}
+style={{
 background:"#0A66C2",
 color:"white",
 border:"none",
@@ -860,7 +868,9 @@ flexDirection:"column",
 alignItems:"center",
 gap:"4px"
 }}>
-<button style={{
+<button
+onClick={() => window.open("https://x.com", "_blank")}
+style={{
 background:"black",
 color:"white",
 border:"none",

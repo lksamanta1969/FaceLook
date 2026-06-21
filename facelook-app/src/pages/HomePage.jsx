@@ -117,6 +117,8 @@ const openYouTube = () => {
   window.open("https://www.youtube.com", "_blank");
 };
 
+<p onClick={openFacebook}>📘 Facebook</p>
+
 const openX = () => {
   window.open("https://x.com", "_blank");
 };
