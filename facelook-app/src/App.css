@@ -432,3 +432,21 @@ input{
   padding: 10px;
   z-index: 9999;
 }
+.message{
+    padding:10px;
+}
+
+.sent{
+    background:#1877f2;
+}
+
+.received{
+    background:#ddd;
+}
+
+/* 👇 একদম নিচে add করবে */
+
+.centerFeed{
+    flex:1;
+    max-width:700px;
+}

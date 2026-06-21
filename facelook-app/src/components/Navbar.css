@@ -1,0 +1,146 @@
+.navbar{
+    height:72px;
+    background:linear-gradient(90deg,#1877f2,#2563eb);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    position:sticky;
+    top:0;
+    z-index:999;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+/* ---------- Left ---------- */
+
+.nav-left{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.logo{
+    width: 70px;
+    height: 70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    overflow:hidden;
+    background:#ffffff;
+    border:3px solid #0d6efd;
+    box-shadow:0 2px 10px rgba(0,0,0,.25);
+    cursor:pointer;
+    transition:.3s;
+}
+
+.logo img{
+    width:95%;
+    height:95%;
+    object-fit:contain;
+    border-radius:50%;
+}
+
+.logo:hover img{
+    transform:scale(1.08);
+}
+
+/* ---------- Search ---------- */
+
+.search-box{
+    width:360px;
+    height:44px;
+    background:#fff;
+    border-radius:25px;
+    display:flex;
+    align-items:center;
+    padding:0 15px;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+
+.search-icon{
+    color:#777;
+    font-size:16px;
+    margin-right:10px;
+}
+
+.search{
+    flex:1;
+    border:none;
+    outline:none;
+    font-size:15px;
+    background:transparent;
+    color:#333;
+}
+
+.search::placeholder{
+    color:#888;
+}
+
+/* ---------- Center ---------- */
+
+.nav-center{
+    display:flex;
+    align-items:center;
+    gap:35px;
+}
+
+.nav-icon{
+    color:white;
+    font-size:24px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.nav-icon:hover{
+    transform:translateY(-2px) scale(1.08);
+    color:#ffd54f;
+}
+
+.active{
+    color:#ffffff;
+    border-bottom:3px solid #fff;
+    padding-bottom:10px;
+}
+
+/* ---------- Right ---------- */
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.notify{
+    position:relative;
+}
+
+.badge{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#ff2d55;
+    color:#fff;
+    font-size:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #fff;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.avatar:hover{
+    transform:scale(1.08);
+}

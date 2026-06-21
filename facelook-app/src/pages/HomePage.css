@@ -1,0 +1,29 @@
+.social-card{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  padding:12px 15px;
+  margin-bottom:10px;
+
+  background:#f0f2f5;
+  border-radius:10px;
+
+  cursor:pointer;
+
+  font-size:16px;
+  font-weight:600;
+
+  transition:all .25s ease;
+}
+
+.social-card:hover{
+  background:#1877f2;
+  color:#fff;
+  transform:translateX(5px);
+  box-shadow:0 4px 12px rgba(24,119,242,.30);
+}
+
+.social-card:active{
+  transform:scale(.98);
+}
