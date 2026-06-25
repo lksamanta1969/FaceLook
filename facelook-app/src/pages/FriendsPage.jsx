@@ -1,3 +1,4 @@
+import "./FriendsPage.css";
 import React, { useState, useEffect } from "react";
 
 import { db } from "../firebase";
@@ -63,58 +64,45 @@ async function removeFriend(id) {
   loadFriends();
 }
 return (
-  <div
-    style={{
-      padding: "20px",
-      maxWidth: "450px"
-    }}
-  >
+
+<div className="friendsPage">
+
     <h2>Add Friend</h2>
 
-    <div
-      style={{
-        display: "flex",
-        marginBottom: "15px",
-        gap: "10px"
-      }}
-    >
-      <input
-        value={newFriend}
-        onChange={(e) => setNewFriend(e.target.value)}
-        placeholder="friend name"
-        style={{
-          flex: 1,
-          padding: "10px",
-          borderRadius: "5px"
-        }}
-      />
+<div className="addFriendBox">
 
-      <button onClick={addFriend}>
-        Add
-      </button>
-    </div>
+  <input
+    className="friendInput"
+    value={newFriend}
+    onChange={(e) => setNewFriend(e.target.value)}
+    placeholder="Friend name"
+/>    
 
-    {friends.map((f) => (
-      <div
-        key={f.id}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          marginBottom: "12px",
-          gap: "10px"
-        }}
-      >
+<button
+    className="addButton"
+    onClick={addFriend}
+>
+    Add Friend
+</button>
+
+  <div
+    key={f.id}
+    className="friendRow"
+></div>  
         <div
-          style={{
-            background: "#d46f1a",
-            color: "#fff",
-            borderRadius: "20px",
-            padding: "8px 15px",
-            minWidth: "220px",
-            display: "flex",
-            alignItems: "center",
-            gap: "8px"
-          }}
+        style={{
+  background: "#d46f1a",
+  color: "#fff",
+  borderRadius: "20px",
+  padding: "8px 15px",
+  width: "280px",
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis"
+}}  
         >
           <span style={{ color: "#7CFC00" }}>🟢</span>
           {f.name}

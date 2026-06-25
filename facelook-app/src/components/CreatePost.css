@@ -1,52 +1,92 @@
-.createPost{
-    background:#fff;
-    border-radius:12px;
-    padding:18px;
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
-    margin-bottom:20px;
+.createPost {
+    background: #1F2937;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .25);
 }
 
-.createPostTop{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    margin-bottom:15px;
+.createPostTop {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.createProfile{
-    width:50px;
-    height:50px;
-    border-radius:50%;
-    object-fit:cover;
+.createProfile {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #2563EB;
 }
 
-.postInput{
-    flex:1;
-    padding:12px 18px;
-    border:none;
-    border-radius:30px;
-    background:#f0f2f5;
-    outline:none;
-    font-size:15px;
+.postInfo {
+    flex: 1;
 }
 
-.createPostBottom{
-    display:flex;
-    justify-content:space-around;
-    border-top:1px solid #ddd;
-    padding-top:15px;
+.postInfo h4 {
+    margin: 0 0 8px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
 }
 
-.createPostBottom button{
-    border:none;
-    background:none;
-    cursor:pointer;
-    padding:10px 18px;
-    border-radius:8px;
-    font-size:15px;
-    transition:.3s;
+.postInput {
+    width: 100%;
+    padding: 12px 18px;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    background: #374151;
+    color: #ffffff;
+    font-size: 15px;
 }
 
-.createPostBottom button:hover{
-    background:#f0f2f5;
+.postInput::placeholder {
+    color: #9CA3AF;
+}
+
+.postDivider {
+    border: none;
+    border-top: 1px solid #374151;
+    margin: 18px 0;
+}
+
+.createPostBottom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.postOption {
+    border: none;
+    background: #374151;
+    color: white;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: all .3s ease;
+}
+
+.postOption:hover {
+    background: #2563EB;
+}
+
+.postButton {
+    margin-left: auto;
+    border: none;
+    background: #2563EB;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all .3s ease;
+}
+
+.postButton:hover {
+    background: #3B82F6;
 }

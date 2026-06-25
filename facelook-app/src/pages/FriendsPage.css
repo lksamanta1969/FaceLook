@@ -1,0 +1,119 @@
+.friendsPage {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    color: white;
+}
+
+.friendsPage h2 {
+    margin-bottom: 20px;
+}
+
+.addFriendBox {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.friendInput {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background: #374151;
+    color: white;
+    font-size: 15px;
+}
+
+.addButton {
+    padding: 12px 20px;
+    background: #2563EB;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.addButton:hover {
+    background: #3B82F6;
+}
+
+.friendRow {
+    display: grid;
+    grid-template-columns: 55px 1fr 50px 50px 50px;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 15px;
+    margin-bottom: 12px;
+
+    background: #1F2937;
+    border-radius: 12px;
+
+    transition: .3s;
+}
+
+.friendRow:hover {
+    background: #374151;
+}
+
+.friendAvatar {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+
+    background: #2563EB;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    color: white;
+}
+
+.friendName {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.online {
+    color: #31C48D;
+}
+
+.actionBtn {
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    color: white;
+
+    background: #2563EB;
+
+    transition: .3s;
+}
+
+.actionBtn:hover {
+    background: #3B82F6;
+}
+
+.deleteBtn {
+    background: #DC2626;
+}
+
+.deleteBtn:hover {
+    background: #EF4444;
+}
