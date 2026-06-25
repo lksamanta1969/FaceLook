@@ -1,0 +1,15 @@
+# Node modules
+node_modules/
+
+# Backup folders
+Backup/
+
+# Root npm files (if not used)
+package-lock.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
