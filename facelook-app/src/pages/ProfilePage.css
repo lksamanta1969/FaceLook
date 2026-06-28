@@ -5,8 +5,7 @@
 }
 
 .cover-photo{
-    height:260px;
-    position:relative;
+    display:none;
 }
 
 .cover-picker{
@@ -22,21 +21,30 @@
 
 .profile-card{
     width:550px;
-    margin:-80px auto 0;
+    max-width:95%;
+    margin:30px auto;
     background:#fff;
     border-radius:18px;
     padding:25px;
     text-align:center;
-    box-shadow:0 8px 25px rgba(0,0,0,.15);
-}
-
-.profile-image-box{
-    margin-top:-70px;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+    overflow:visible;
 }
 
 .profile-image{
-    width:150px;
-    height:150px;
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    border:6px solid #fff;
+    object-fit:cover;
+    box-shadow:0 3px 10px rgba(0,0,0,.25);
+    display:block;
+    margin:0 auto;
+}
+
+.profile-image{
+    width:140px;
+    height:140px;
     border-radius:50%;
     border:6px solid #fff;
     object-fit:cover;
@@ -44,8 +52,8 @@
 }
 
 .profile-placeholder{
-    width:150px;
-    height:150px;
+    width:140px;
+    height:140px;
     border-radius:50%;
     background:#e4e6eb;
     display:flex;
@@ -53,7 +61,7 @@
     justify-content:center;
     font-size:70px;
     margin:auto;
-    border:6px solid white;
+    border:5px solid white;
 }
 
 .profile-input,
@@ -63,24 +71,34 @@
     padding:12px;
     border:1px solid #ddd;
     border-radius:10px;
+    background:#f8f9fa;
     font-size:16px;
     box-sizing:border-box;
+    transition:.25s;
 }
 
+.profile-input:focus,
+.profile-textarea:focus{
+    outline:none;
+    border-color:#1877f2;
+    box-shadow:0 0 0 3px rgba(24,119,242,.15);
+}
 .profile-textarea{
     min-height:100px;
     resize:none;
 }
 
 .save-btn{
-    margin-top:22px;
-    width:100%;
+    display:block;
+    margin:22px auto 0;
+    width:220px;
     padding:13px;
     background:#1877f2;
     color:white;
     border:none;
     border-radius:10px;
     font-size:17px;
+    font-weight:600;
     cursor:pointer;
     transition:.3s;
 }

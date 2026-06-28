@@ -1,5 +1,5 @@
 .friendsPage {
-    max-width: 900px;
+    max-width: 700px;
     margin: 20px auto;
     padding: 20px;
     color: white;
@@ -41,20 +41,20 @@
     background: #3B82F6;
 }
 
-.friendRow {
-    display: grid;
-    grid-template-columns: 55px 1fr 50px 50px 50px;
-    align-items: center;
+.friendRow{
+    display:grid;
+    grid-template-columns:45px 1fr 40px 40px 40px;
+    align-items:center;
 
-    gap: 12px;
+    gap:8px;
 
-    padding: 12px 15px;
-    margin-bottom: 12px;
+    padding:8px 12px;
+    margin-bottom:8px;
 
-    background: #1F2937;
-    border-radius: 12px;
+    background:#1F2937;
+    border-radius:10px;
 
-    transition: .3s;
+    transition:.3s;
 }
 
 .friendRow:hover {
@@ -62,8 +62,8 @@
 }
 
 .friendAvatar {
-    width: 45px;
-    height: 45px;
+    width: 38px;
+    height: 38px;
 
     border-radius: 50%;
 
@@ -91,11 +91,12 @@
 }
 
 .actionBtn {
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
 
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
+    font-size:15px;
 
     cursor: pointer;
 
@@ -110,10 +111,10 @@
     background: #3B82F6;
 }
 
-.deleteBtn {
-    background: #DC2626;
+.deleteBtn{
+    background:#dc2626;
 }
 
-.deleteBtn:hover {
-    background: #EF4444;
+.deleteBtn:hover{
+    background:#ef4444;
 }

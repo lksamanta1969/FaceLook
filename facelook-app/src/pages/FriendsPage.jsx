@@ -1,6 +1,5 @@
 import "./FriendsPage.css";
 import React, { useState, useEffect } from "react";
-
 import { db } from "../firebase";
 
 import {
@@ -8,23 +7,19 @@ import {
   addDoc,
   getDocs,
   deleteDoc,
-  doc
+  doc,
 } from "firebase/firestore";
 
 function FriendsPage() {
-
   const [newFriend, setNewFriend] = useState("");
-
   const [friends, setFriends] = useState([]);
 
   async function loadFriends() {
+    const querySnapshot = await getDocs(collection(db, "users"));
 
-    const querySnapshot =
-      await getDocs(collection(db, "users"));
-
-    const users = querySnapshot.docs.map(doc => ({
+    const users = querySnapshot.docs.map((doc) => ({
       id: doc.id,
-      ...doc.data()
+      ...doc.data(),
     }));
 
     setFriends(users);
@@ -35,97 +30,81 @@ function FriendsPage() {
   }, []);
 
   async function addFriend() {
+    if (!newFriend.trim()) return;
 
-    if (newFriend.trim() === "") return;
     if (
-  friends.some(
-    f =>
-      (f.name || "").toLowerCase() ===
-      newFriend.toLowerCase()
-  )
-) {
-  alert("Friend already exists");
-  return;
-}
+      friends.some(
+        (f) =>
+          (f.name || "").toLowerCase() ===
+          newFriend.toLowerCase()
+      )
+    ) {
+      alert("Friend already exists");
+      return;
+    }
 
     await addDoc(collection(db, "users"), {
       name: newFriend,
-      online: true
+      online: true,
     });
 
     setNewFriend("");
-
     loadFriends();
   }
-async function removeFriend(id) {
 
-  await deleteDoc(doc(db, "users", id));
+  async function removeFriend(id) {
+    await deleteDoc(doc(db, "users", id));
+    loadFriends();
+  }
 
-  loadFriends();
-}
-return (
+  return (
+    <div className="friendsPage">
+      <h2>Add Friend</h2>
 
-<div className="friendsPage">
-
-    <h2>Add Friend</h2>
-
-<div className="addFriendBox">
-
-  <input
-    className="friendInput"
-    value={newFriend}
-    onChange={(e) => setNewFriend(e.target.value)}
-    placeholder="Friend name"
-/>    
-
-<button
-    className="addButton"
-    onClick={addFriend}
->
-    Add Friend
-</button>
-
-  <div
-    key={f.id}
-    className="friendRow"
-></div>  
-        <div
-        style={{
-  background: "#d46f1a",
-  color: "#fff",
-  borderRadius: "20px",
-  padding: "8px 15px",
-  width: "280px",
-  display: "flex",
-  alignItems: "center",
-  gap: "8px",
-  whiteSpace: "nowrap",
-  overflow: "hidden",
-  textOverflow: "ellipsis"
-}}  
-        >
-          <span style={{ color: "#7CFC00" }}>🟢</span>
-          {f.name}
-        </div>
-
-        <button>💬</button>
-        <button>📞</button>
+      <div className="addFriendBox">
+        <input
+          className="friendInput"
+          value={newFriend}
+          onChange={(e) => setNewFriend(e.target.value)}
+          placeholder="Friend name"
+        />
 
         <button
-          onClick={() => removeFriend(f.id)}
-          style={{
-            background: "red",
-            color: "white",
-            border: "none",
-            borderRadius: "5px"
-          }}
+          className="addButton"
+          onClick={addFriend}
         >
-          🗑️
+          Add Friend
         </button>
+        </div>
+
+         <div className="friendList">
+
+        {friends.map((f) => (
+        <div
+  key={f.id}
+  className="friendRow"
+>  
+   <div className="friendName">  
+
+             <span className="online">🟢</span>
+              {f.name}
+            </div>
+
+          <button className="actionBtn">💬</button>
+
+<button className="actionBtn">📞</button>
+
+<button
+  className="actionBtn deleteBtn"
+  onClick={() => removeFriend(f.id)}
+>
+  🗑️
+</button> 
+          </div>
+        ))}
       </div>
-    ))}
-  </div>
-); 
+    </div>
+  );
 }
 
 export default FriendsPage;

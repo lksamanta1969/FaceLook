@@ -1,3 +1,6 @@
+import Navbar from "../components/Navbar";
+import LeftSidebar from "../components/LeftSidebar";
+import RightSidebar from "../components/RightSidebar";
 import React, { useState } from "react";
 import "./ProfilePage.css";
 

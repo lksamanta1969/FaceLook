@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export default function LeftSidebar() {
   const profileImage = localStorage.getItem("profileImage");
+
   const name =
     localStorage.getItem("name") || "Lakshmi Kanta Samanta";
 
@@ -24,6 +25,7 @@ export default function LeftSidebar() {
 
   return (
     <aside className="leftSidebar">
+      {/* Profile */}
       <div className="profileBox">
         {profileImage ? (
           <img
@@ -32,7 +34,10 @@ export default function LeftSidebar() {
             className="profileImage"
           />
         ) : (
-          <div className="profileImage" style={{ fontSize: "60px" }}>
+          <div
+            className="profileImage"
+            style={{ fontSize: "60px" }}
+          >
             👤
           </div>
         )}
@@ -41,6 +46,66 @@ export default function LeftSidebar() {
         <p>{designation}</p>
       </div>
 
+      {/* Social Links */}
+      <div className="socialSection">
+        <h4>🌐 Social Links</h4>
+
+        <div
+          className="social-card"
+          onClick={() =>
+            window.open("https://www.facebook.com", "_blank")
+          }
+        >
+          📘 Facebook
+        </div>
+
+        <div
+          className="social-card"
+          onClick={() =>
+            window.open("https://www.instagram.com", "_blank")
+          }
+        >
+          📷 Instagram
+        </div>
+
+        <div
+          className="social-card"
+          onClick={() =>
+            window.open("https://web.whatsapp.com", "_blank")
+          }
+        >
+          💬 WhatsApp
+        </div>
+
+        <div
+          className="social-card"
+          onClick={() =>
+            window.open("https://www.linkedin.com", "_blank")
+          }
+        >
+          💼 LinkedIn
+        </div>
+
+        <div
+          className="social-card"
+          onClick={() =>
+            window.open("https://www.youtube.com", "_blank")
+          }
+        >
+          ▶️ YouTube
+        </div>
+
+        <div
+          className="social-card"
+          onClick={() =>
+            window.open("https://x.com", "_blank")
+          }
+        >
+          ❌ X (Twitter)
+        </div>
+      </div>
+
+      {/* Menu */}
       <ul className="menuList">
         {menus.map((item) => (
           <li key={item.path}>
